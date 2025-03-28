@@ -52,133 +52,12 @@ $qtereservation = $reservation['qteBilletsNormal'] + $reservation['qteBilletsRed
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facture #<?php echo htmlspecialchars($reservation['idReservation']); ?></title>>
+    <title>Facture #<?php echo htmlspecialchars($reservation['idReservation']); ?></title>
+    <link rel="stylesheet" href="css/facteur.css?v=<?php echo time(); ?>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            padding: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-        }
-        
-        .company-info {
-            font-weight: bold;
-        }
-        
-        .company-name {
-            font-size: 18px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-        
-        .company-address {
-            font-size: 12px;
-            font-weight: normal;
-        }
-        
-        .client-info {
-            text-align: right;
-            font-size: 12px;
-        }
-        
-        .client-name {
-            font-weight: bold;
-        }
-        
-        .event-info {
-            text-transform: uppercase;
-            margin-bottom: 30px;
-        }
-        
-        .event-name {
-            font-weight: bold;
-        }
-        
-        .invoice-title {
-            text-transform: uppercase;
-            font-size: 20px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-        
-        th, td {
-            padding: 10px 5px;
-            text-align: left;
-        }
-        
-        th {
-            border-bottom: 1px solid #ddd;
-        }
-        
-        td {
-            border-bottom: 1px solid #eee;
-        }
-        
-        tr:last-child td {
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .text-right {
-            text-align: right;
-        }
-        
-        .total-row {
-            text-align: right;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-        
-        .total-line {
-            border-top: 1px solid #ddd;
-            margin: 20px 0;
-        }
-        
-        .thank-you {
-            text-align: center;
-            margin-top: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .button-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-        button {
-            background: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+ 
 </head>
 <body>
     
@@ -232,7 +111,7 @@ $qtereservation = $reservation['qteBilletsNormal'] + $reservation['qteBilletsRed
                     <td class="text-right"><strong><?php 
                 $totalPrice = ($reservation['qteBilletsNormal'] * $reservation['TariffNormal']) + 
                               ($reservation['qteBilletsReduit'] * $reservation['TariffReduit']);
-                echo number_format($totalPrice, 2); ?></strong></td>
+                echo number_format($totalPrice, 2); ?>MAD</strong></td>
                 </tr>
             </tbody>
         </table>
@@ -243,10 +122,8 @@ $qtereservation = $reservation['qteBilletsNormal'] + $reservation['qteBilletsRed
 
     <div class="button-container">
         <button onclick="downloadFacture()">Download Invoice</button>
-        <form method="POST">
-            <input type="hidden" name="reservation_id" value="<?php echo $reservationId; ?>">
-            <button name='toMyTickets'>Show Tickets</button>
-        </form>
+            <a href="facteur.php?id=<?= urlencode($reservation['idReservation']) ?>" class="btn">Show Tickets</a>
+
     </div>
 </body>
 
